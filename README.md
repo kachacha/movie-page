@@ -1,28 +1,34 @@
-# y
+# How to use it?
 
-> A Vue.js project
+在线VIP视频任意看前端
 
-## Build Setup
+## Web
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
+```
+git clone https://github.com/orangbus/video.git
+cd video && yarn run build
+cp -R dist public
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/)
-and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+wwwroot -> webPath to /video/public
+
+## Local
+
+```
+git clone https://github.com/orangbus/video.git
+yarn install 
+# 调试
+yarn serve
+```
+
+## Project setup
+
+```
+yarn install
+```
+
+### Lints and fixes files
+
+```
+yarn run lint
+```

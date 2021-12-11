@@ -1,13 +1,28 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <AppHeader/>
+    <div id="app-content">
+      <router-view/>
+    </div>
+    <AppFooter/>
   </div>
 </template>
 
 <script>
+import AppHeader from './components/Header';
+import AppFooter from './components/Footer';
+
 export default {
-  name: 'App'
+  name: 'app',
+  data() {
+    return {
+      title: "OrangBus在线解析"
+    }
+  },
+  components: {
+    AppHeader,
+    AppFooter
+  }
 }
 </script>
 
@@ -18,6 +33,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+#app-content {
+  margin-top: 70px;
 }
 </style>
