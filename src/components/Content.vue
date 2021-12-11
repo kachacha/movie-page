@@ -1,33 +1,30 @@
 <template>
   <div class="container">
     <div class="row">
-<!--      <div class="col-md-6">-->
-<!--        <div class="input-group mb-3">-->
-<!--          <div class="input-group-prepend">-->
-<!--            <select class="input-group-text" v-model="selected">-->
-<!--              <option-->
-<!--                  v-for="list in lists"-->
-<!--                  :key="list.value"-->
-<!--                  :value="list.value"-->
-<!--              >-->
-<!--                {{ list.name }}-->
-<!--              </option>-->
-<!--            </select>-->
-<!--          </div>-->
-<!--          <input v-model="words" @blur="Search()" type="text" class="form-control" placeholder="请输入电影名。随便点击空白处搜索">-->
-      <!--          <div class="input-group-append">-->
-      <!--            <span class="input-group-text" @click="ClearKeyWord">搜索</span>-->
-      <!--          </div>-->
-      <!--          <div class="input-group-append">-->
-      <!--            <span class="input-group-text" @click="ClearKeyWord">清除关键词<span-->
-      <!--                style="color: red">{{ words.substring(0, 4) }}</span></span>-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--      </div>-->
-      <div class="input-group-prepend">
-        <a class="sub-link" data-v-27bed296="" href="./play?a=//www.iqiyi.com/lib/s_201084105.html"
-           style="margin-right: 5px;" target="_blank" title="约翰尼·德普">约翰尼·德普</a>
+      <div class="col-md-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <select v-model="selected" class="input-group-text">
+              <option
+                  v-for="list in lists"
+                  :key="list.value"
+                  :value="list.value"
+              >
+                {{ list.name }}
+              </option>
+            </select>
+          </div>
+          <input v-model="words" class="form-control" placeholder="请输入电影名。随便点击空白处搜索" type="text" @blur="Search()">
+          <div class="input-group-append">
+            <span class="input-group-text" @click="Search">搜索</span>
+          </div>
+          <!--          <div class="input-group-append">-->
+          <!--                  <span class="input-group-text" @click="ClearKeyWord">清除关键词<span-->
+          <!--                      style="color: red">{{ words.substring(0, 4) }}</span></span>-->
+          <!--          </div>-->
+        </div>
       </div>
+
       <div class="col-md-6">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
@@ -54,33 +51,46 @@
         <iframe v-bind:src="videourl" frameborder="0" id="case3" allowfullscreen></iframe>
       </div>
     </div>
-    <div class="row">
+    <div class="input-group-prepend">
+      <a class="sub-link" data-v-27bed296="" href="./play?a=//www.iqiyi.com/lib/s_201084105.html"
+         style="margin-right: 5px;" target="_blank" title="约翰尼·德普">约翰尼·德普</a>
+    </div>
+    <div class="row" style="
+        margin-right: -15px;
+    margin-left: -15px;
+    position: absolute;
+    z-index: 1;background-color: #1379ff;">
+      <div class="col-md-12" style="min-height: 800px;">
+        <div v-html="rawHtml"></div>
+      </div>
+    </div>
+    <div class="row" style="opacity: 0.4;">
       <div class="col-md-12" style="padding: 0px">
         <iframe v-bind:src="url" frameborder="0" id="case4"></iframe>
       </div>
     </div>
     <!--使用教程-->
-<!--    <div class="row" style="border-radius: 15px;background-color: white;margin-top:10px">-->
-<!--      <div class="col-md-12">-->
-<!--        <div class="text-center">-->
-<!--          <h2 style="margin-top:5px">vip解析使用教程</h2>-->
-<!--          <hr style="width: 90%;">-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="col-md-4">-->
-<!--        <a href="#" data-toggle="tooltip" title="点击图片观看视频教程!" @click="PcDemo">-->
-<!--          <img src="/images/orangbus.png" alt="" style="width: 180px;height: 180px;">-->
-<!--          &lt;!&ndash;                    <p><a  @click="PcDemo">Pc演示</a> | <a  @click="MobDemo">手机演示</a></p>&ndash;&gt;-->
-<!--        </a>-->
-<!--      </div>-->
-<!--      <div class="col-md-8 text-left">-->
-<!--        <p style="color: red">解析线路来自网络收集,如有侵权请及时联系站长删除</p>-->
-<!--        <p>1、左侧输入框输入关键词，点击空白即可搜索</p>-->
-<!--        <p>2、在搜索结果中，右键复制视频地址</p>-->
-<!--        <p>3、右侧输入框粘贴刚刚复制的视频地址，随意点击空白区域即可观看</p>-->
-<!--        <p>4、不能播放请尝试其他线路，我们支持的平台有</p>-->
-<!--      </div>-->
-<!--    </div>-->
+    <!--    <div class="row" style="border-radius: 15px;background-color: white;margin-top:10px">-->
+    <!--      <div class="col-md-12">-->
+    <!--        <div class="text-center">-->
+    <!--          <h2 style="margin-top:5px">vip解析使用教程</h2>-->
+    <!--          <hr style="width: 90%;">-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div class="col-md-4">-->
+    <!--        <a href="#" data-toggle="tooltip" title="点击图片观看视频教程!" @click="PcDemo">-->
+    <!--          <img src="/images/orangbus.png" alt="" style="width: 180px;height: 180px;">-->
+    <!--          &lt;!&ndash;                    <p><a  @click="PcDemo">Pc演示</a> | <a  @click="MobDemo">手机演示</a></p>&ndash;&gt;-->
+    <!--        </a>-->
+    <!--      </div>-->
+    <!--      <div class="col-md-8 text-left">-->
+    <!--        <p style="color: red">解析线路来自网络收集,如有侵权请及时联系站长删除</p>-->
+    <!--        <p>1、左侧输入框输入关键词，点击空白即可搜索</p>-->
+    <!--        <p>2、在搜索结果中，右键复制视频地址</p>-->
+    <!--        <p>3、右侧输入框粘贴刚刚复制的视频地址，随意点击空白区域即可观看</p>-->
+    <!--        <p>4、不能播放请尝试其他线路，我们支持的平台有</p>-->
+    <!--      </div>-->
+    <!--    </div>-->
     <!--支持平台-->
     <div class="row" style="border-radius: 15px;background-color: white;margin-top:10px">
       <div class="col-md-12">
@@ -99,9 +109,11 @@ import layer from "layui-layer";
 import DataList from "../data";
 
 export default {
+
   name: "Show",
   data() {
     return {
+      rawHtml: "",
       url: "https://v.qq.com/biu/ranks/?t=hotsearch",
       wapurl: "https://m.v.qq.com/index.html",
       playurl: "",
@@ -116,10 +128,29 @@ export default {
     }
   },
   mounted() {
+
+    // 初始化页面之前获取图片验证码的接口，无需定义方法直接请求
+    // getImgCode()
+    //     .then(res => {
+    //       let blob = new Blob([res], { type: "image/jpeg" });
+    //       let url = URL.createObjectURL(blob);
+    //
+    //       this.ImgCode = url;
+    //     })
+    //     .catch(res => {
+    //       alert("网络开小差了，没有获取到图片验证码哦", res);
+    //     });
+
+
     this.getData();
     this.isPc();
   },
   methods: {
+    // 先定义一个方法 getCode，供上面引用，
+    getCode() {
+
+    },
+
     Demo: function () {
       // eslint-disable-next-line no-console
       // console.log(this.lists)
@@ -127,6 +158,8 @@ export default {
       console.log(this.selected)
     },
     Search: function () {
+      // eslint-disable-next-line no-console
+      console.log(this.$Api.channelCompare)
       let that = this;
       let words = that.words;
       if (words.length == "") {
@@ -141,6 +174,23 @@ export default {
       let searchWord = that.selected + words;
       that.url = searchWord;
       that.isplay = false;
+      // 传得参数对象
+      // eslint-disable-next-line
+      let query = {
+        s_type: "iaiqi",
+        s_word: that.words
+      }
+      this.axios.get("/zfeno-video/api/v1/search?s_type=iqiyi&s_word=" + that.words)
+          .then((res) => {
+            // eslint-disable-next-line no-console
+            console.log(res.data)
+            this.rawHtml = res.data.data;
+          })
+          .catch(res => {
+            // eslint-disable-next-line no-console
+            console.log(res)
+            // 失败时候的操作
+          });
     },
     //清除搜索关键词
     ClearKeyWord: function () {

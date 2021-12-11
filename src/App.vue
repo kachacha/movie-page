@@ -16,7 +16,7 @@ export default {
   name: 'app',
   data() {
     return {
-      title: "OrangBus在线解析"
+      title: "VideoPlus在线解析"
     }
   },
   components: {

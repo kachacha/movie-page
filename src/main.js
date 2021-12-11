@@ -8,7 +8,10 @@ import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import router from './Router/router'
 import store from "./Vuex";
+import Api from "./request/index"
 
+// 将Api对象绑定在vue实例的原型上
+Vue.prototype.$Api = Api
 Vue.config.productionTip = false;
 
 Vue.use(VueRouter);
@@ -22,5 +25,6 @@ Vue.use(Vuex);
 new Vue({
   router,
   store,
+  Api,
   render: h => h(App),
 }).$mount('#app');

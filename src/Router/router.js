@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Content from '../components/Content'
+import Play from '../components/Play'
 // import Video from '../components/Video/Video'
 import M3u8 from '../components/Video/M3u8'
 import miss from '../components/404'
@@ -12,6 +13,11 @@ const routes = [
         path: '/',
         name: 'Content',
         component: Content
+    },
+    {
+        path: '/play',
+        name: 'Play',
+        component: Play
     },
     {
         path: '/m3u8',
