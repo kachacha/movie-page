@@ -15,15 +15,19 @@
 <!--            </select>-->
 <!--          </div>-->
 <!--          <input v-model="words" @blur="Search()" type="text" class="form-control" placeholder="请输入电影名。随便点击空白处搜索">-->
-<!--          <div class="input-group-append">-->
-<!--            <span class="input-group-text" @click="ClearKeyWord">搜索</span>-->
-<!--          </div>-->
-<!--          <div class="input-group-append">-->
-<!--            <span class="input-group-text" @click="ClearKeyWord">清除关键词<span-->
-<!--                style="color: red">{{ words.substring(0, 4) }}</span></span>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
+      <!--          <div class="input-group-append">-->
+      <!--            <span class="input-group-text" @click="ClearKeyWord">搜索</span>-->
+      <!--          </div>-->
+      <!--          <div class="input-group-append">-->
+      <!--            <span class="input-group-text" @click="ClearKeyWord">清除关键词<span-->
+      <!--                style="color: red">{{ words.substring(0, 4) }}</span></span>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--      </div>-->
+      <div class="input-group-prepend">
+        <a class="sub-link" data-v-27bed296="" href="./play?a=//www.iqiyi.com/lib/s_201084105.html"
+           style="margin-right: 5px;" target="_blank" title="约翰尼·德普">约翰尼·德普</a>
+      </div>
       <div class="col-md-6">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
