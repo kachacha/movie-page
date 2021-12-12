@@ -1,8 +1,14 @@
 let DataList = {
     lists: [
-        {name: "腾讯视频", value: "https://v.qq.com/x/search/?q=", wapurl: "https://m.v.qq.com/index.html", selected: true},
-        {name: "优酷视频", value: "https://so.youku.com/search_video/q_", wapurl: "", selected: false},
-        {name: "爱奇艺视频", value: "https://so.iqiyi.com/so/q_", wapurl: "", elected: false}
+        {
+            name: "qq",
+            value: "https://v.qq.com/x/search/?q=",
+            wapurl: "https://m.v.qq.com/index.html",
+            selected: true,
+            label: "腾讯视频"
+        },
+        {name: "youku", value: "https://so.youku.com/search_video/q_", wapurl: "", selected: false, label: "优酷视频"},
+        {name: "iqiyi", value: "https://so.iqiyi.com/so/q_", wapurl: "", elected: false, label: "爱奇艺视频"}
     ],
     vips: [
         {name: "解析1", url: "https://api.sigujx.com/jx/?url=", selected: true},

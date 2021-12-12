@@ -4,13 +4,13 @@
       <div class="col-md-6">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <select v-model="selected" class="input-group-text">
+            <select v-model="selected_platform.name" class="input-group-text">
               <option
                   v-for="list in lists"
-                  :key="list.value"
-                  :value="list.value"
+                  :key="list.name"
+                  :value="list.name"
               >
-                {{ list.name }}
+                {{ list.label }}
               </option>
             </select>
           </div>
@@ -25,43 +25,50 @@
         </div>
       </div>
 
-      <div class="col-md-6">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" @click="ClearUrl">清除URL</span>
-          </div>
-          <input v-model="playurl" @blur="PlayVideo()" type="text" class="form-control"
-                 placeholder="请输入视频Url地址，点击空白区域播放">
-          <div class="input-group-append">
-            <select class="input-group-text" @change="ChangePreUrl" v-model="preurl">
-              <option
-                  v-for="item in vips"
-                  :key="item.url"
-                  :value="item.url"
-              >
-                {{ item.name }}
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
+      <!--      <div class="col-md-6">-->
+      <!--        <div class="input-group mb-3">-->
+      <!--          <div class="input-group-prepend">-->
+      <!--            <span class="input-group-text" @click="ClearUrl">清除URL</span>-->
+      <!--          </div>-->
+      <!--          <input v-model="playurl" @blur="PlayVideo()" type="text" class="form-control"-->
+      <!--                 placeholder="请输入视频Url地址，点击空白区域播放">-->
+      <!--          <div class="input-group-append">-->
+      <!--            <select class="input-group-text" @change="ChangePreUrl" v-model="preurl">-->
+      <!--              <option-->
+      <!--                  v-for="item in vips"-->
+      <!--                  :key="item.url"-->
+      <!--                  :value="item.url"-->
+      <!--              >-->
+      <!--                {{ item.name }}-->
+      <!--              </option>-->
+      <!--            </select>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--      </div>-->
     </div>
     <div class="row" v-show="isplay == true">
       <div class="col-md-12" style="padding: 0px">
         <iframe v-bind:src="videourl" frameborder="0" id="case3" allowfullscreen></iframe>
       </div>
     </div>
-    <div class="input-group-prepend">
-      <a class="sub-link" data-v-27bed296="" href="./play?a=//www.iqiyi.com/lib/s_201084105.html"
-         style="margin-right: 5px;" target="_blank" title="约翰尼·德普">约翰尼·德普</a>
-    </div>
+
     <div class="row" style="
         margin-right: -15px;
-    margin-left: -15px;
-    position: absolute;
-    z-index: 1;background-color: #1379ff;">
-      <div class="col-md-12" style="min-height: 800px;">
-        <div v-html="rawHtml"></div>
+        margin-left: -15px;
+        position: absolute;
+        z-index: 1;
+        opacity: 0.8;
+        background-color: rgb(0 0 0);">
+      <div class="col-md-12" style="min-height: 800px;max-height: 800px;">
+        <!-- 设置宽高然后进行配置 -->
+        <vue-scroll :ops="ops" style="width:100%;height:100%">
+          <div v-for="(item, v) in rawHtml" :key="v">
+            <!--          id值{{ item.uri }}-->
+            <!--          =>id值{{ v }}-->
+            <p v-html="item.html">{{ item.html }}</p>
+          </div>
+        </vue-scroll>
+
       </div>
     </div>
     <div class="row" style="opacity: 0.4;">
@@ -113,13 +120,29 @@ export default {
   name: "Show",
   data() {
     return {
+      ops: {
+        vuescroll: {},
+        scrollPanel: {},
+        rail: {
+          keepShow: true
+        },
+        bar: {
+          hoverStyle: false,
+          onlyShowBarOnScroll: false, //是否只有滚动的时候才显示滚动条
+          background: "#F5F5F5",//滚动条颜色
+          opacity: 0.5,//滚动条透明度
+          "overflow-x": "hidden"
+        }
+      },
       rawHtml: "",
       url: "https://v.qq.com/biu/ranks/?t=hotsearch",
       wapurl: "https://m.v.qq.com/index.html",
       playurl: "",
       words: "",
       inputurl: "",
-      selected: "https://v.qq.com/x/search/?q=",
+      selected_platform: {
+        name: "qq"
+      },
       preurl: "https://api.sigujx.com/jx/?url=",
       lists: "",
       vips: "",
@@ -146,23 +169,18 @@ export default {
     this.isPc();
   },
   methods: {
-    // 先定义一个方法 getCode，供上面引用，
-    getCode() {
-
-    },
-
     Demo: function () {
       // eslint-disable-next-line no-console
       // console.log(this.lists)
       // eslint-disable-next-line no-console
-      console.log(this.selected)
+      console.log(this.selected_platform)
     },
     Search: function () {
       // eslint-disable-next-line no-console
       console.log(this.$Api.channelCompare)
       let that = this;
       let words = that.words;
-      if (words.length == "") {
+      if (words.length === 0) {
         layer.open({
           title: "提示！",
           icon: 1,
@@ -171,7 +189,11 @@ export default {
         });
         return false;
       }
-      let searchWord = that.selected + words;
+      // eslint-disable-next-line no-console
+      console.log(that.selected_platform)
+      // eslint-disable-next-line no-console
+      that.selected_platform = that.lists.find(item => item.name === that.selected_platform.name);
+      let searchWord = that.selected_platform.value + words;
       that.url = searchWord;
       that.isplay = false;
       // 传得参数对象
@@ -224,7 +246,7 @@ export default {
     },
     ChangePreUrl: function () {
       const that = this;
-      if (that.playurl == "") {
+      if (that.playurl === "") {
         return false;
       } else {
         this.videourl = that.preurl + that.playurl;
@@ -285,4 +307,14 @@ export default {
   height: 800px;
   border-radius: 10px;
 }
+
+/deep/ .__bar-is-vertical {
+  right: -1px !important;
+}
+
+/deep/ .__bar-is-horizontal {
+  display: none !important;
+}
 </style>
+//// 滚动条位置
+//// 隐藏横向滚动条

@@ -9,7 +9,11 @@ import VueRouter from 'vue-router';
 import router from './Router/router'
 import store from "./Vuex";
 import Api from "./request/index"
+import vuescroll from "vuescroll"; //引入vuescroll
+import "vuescroll/dist/vuescroll.css"; //引入vuescroll样式
 
+// 滚动条
+Vue.use(vuescroll);//使用
 // 将Api对象绑定在vue实例的原型上
 Vue.prototype.$Api = Api
 Vue.config.productionTip = false;
