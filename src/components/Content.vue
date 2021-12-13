@@ -25,26 +25,26 @@
         </div>
       </div>
 
-      <!--      <div class="col-md-6">-->
-      <!--        <div class="input-group mb-3">-->
-      <!--          <div class="input-group-prepend">-->
-      <!--            <span class="input-group-text" @click="ClearUrl">清除URL</span>-->
-      <!--          </div>-->
-      <!--          <input v-model="playurl" @blur="PlayVideo()" type="text" class="form-control"-->
-      <!--                 placeholder="请输入视频Url地址，点击空白区域播放">-->
-      <!--          <div class="input-group-append">-->
-      <!--            <select class="input-group-text" @change="ChangePreUrl" v-model="preurl">-->
-      <!--              <option-->
-      <!--                  v-for="item in vips"-->
-      <!--                  :key="item.url"-->
-      <!--                  :value="item.url"-->
-      <!--              >-->
-      <!--                {{ item.name }}-->
-      <!--              </option>-->
-      <!--            </select>-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--      </div>-->
+      <div class="col-md-6">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" @click="ClearUrl">清除URL</span>
+          </div>
+          <input v-model="playurl" class="form-control" placeholder="请输入视频Url地址，点击空白区域播放" type="text"
+                 @blur="PlayVideo()">
+          <div class="input-group-append">
+            <select v-model="preurl" class="input-group-text" @change="ChangePreUrl">
+              <option
+                  v-for="item in vips"
+                  :key="item.url"
+                  :value="item.url"
+              >
+                {{ item.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="row" v-show="isplay == true">
       <div class="col-md-12" style="padding: 0px">

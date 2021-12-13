@@ -28,9 +28,9 @@
         <div class="input-group mb-3">
 
           <input v-model="playUrl" class="form-control" placeholder="请输入视频Url地址，点击空白区域播放" type="text"
-                 @keyup.enter="PlayVideo()">
+                 @keyup.enter="playVideo()">
           <div class="input-group-prepend">
-            <span class="input-group-text" @click="PlayVideo()">播放</span>
+            <span class="input-group-text" @click="playVideo()">播放</span>
           </div>
         </div>
       </div>
@@ -73,11 +73,19 @@ export default {
     }
   },
   created() {
-    let aaa = this.$route.query
+    let getQuery = this.$route.query
     // eslint-disable-next-line no-console
-    console.log(aaa)
+    // console.log(getQuery.play_uri)
+    // eslint-disable-next-line valid-typeof
+    if (typeof (getQuery.play_uri) !== "undefined") {
+      this.playUrl = getQuery.play_uri
+    }
+    // eslint-disable-next-line no-console
+    // console.log(this.playUrl)
+
   },
   mounted() {
+    // this.playVideo();
     this.get_play_uri();
     this.isPc();
   },
@@ -86,18 +94,33 @@ export default {
       this.axios.get("/zfeno-video/api/v1/analysis-plus")
           .then((res) => {
             // eslint-disable-next-line no-console
-            console.log(res.data)
-            this.isPlay = true;
-            layer.msg("解析成功，祝你观赏愉快！")
+            console.log(res.data.code)
+            if (res.data.code > 0) {
+              this.preUrl = res.data.data.uri
+              this.playVideo()
+            } else {
+              layer.open({
+                title: "错误！",
+                icon: 1,
+                content: '获取解析链错误，请联系管理员！',
+                time: 2000
+              });
+            }
           })
           .catch(res => {
             // eslint-disable-next-line no-console
             console.log(res)
+            layer.open({
+              title: "错误！",
+              icon: 1,
+              content: '获取解析链错误，请联系管理员！',
+              time: 2000
+            });
             // 失败时候的操作
           });
     },
     //播放视频
-    PlayVideo: function () {
+    playVideo: function () {
       const that = this;
       if (that.playUrl === "") {
         layer.open({
@@ -109,7 +132,10 @@ export default {
         return false;
       }
       that.videoUrl = that.preUrl + that.playUrl;
-      this.get_play_uri()
+      this.isPlay = true;
+      // eslint-disable-next-line no-console
+      console.log("that.videoUrl", that.preUrl, that.videoUrl)
+      layer.msg("解析成功，祝你观赏愉快！")
     },
 
     isPc() {
@@ -137,5 +163,9 @@ export default {
 </script>
 
 <style scoped>
-
+#case3 {
+  width: 100%;
+  height: 800px;
+  border-radius: 10px;
+}
 </style>
