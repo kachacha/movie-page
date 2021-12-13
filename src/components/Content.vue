@@ -4,11 +4,11 @@
       <div class="col-md-6">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <select v-model="selected_platform.name" class="input-group-text">
+            <select v-model="selected_platform" class="input-group-text">
               <option
                   v-for="list in lists"
                   :key="list.name"
-                  :value="list.name"
+                  :value="list"
               >
                 {{ list.label }}
               </option>
@@ -52,20 +52,14 @@
       </div>
     </div>
 
-    <div class="row" style="
-        margin-right: -15px;
-        margin-left: -15px;
-        position: absolute;
-        z-index: 1;
-        opacity: 0.8;
-        background-color: rgb(0 0 0);">
-      <div class="col-md-12" style="min-height: 800px;max-height: 800px;">
+    <div class="row row-list">
+      <div class="col-md-12 md-curtain-list">
         <!-- 设置宽高然后进行配置 -->
-        <vue-scroll :ops="ops" style="width:100%;height:100%">
+        <vue-scroll :ops="ops" style="width:100%; height:100%">
           <div v-for="(item, v) in rawHtml" :key="v">
             <!--          id值{{ item.uri }}-->
             <!--          =>id值{{ v }}-->
-            <p v-html="item.html">{{ item.html }}</p>
+            <p class="outset" v-html="item.html">{{ item.html }}</p>
           </div>
         </vue-scroll>
 
@@ -117,7 +111,7 @@ import DataList from "../data";
 
 export default {
 
-  name: "Show",
+  name: "Content",
   data() {
     return {
       ops: {
@@ -140,9 +134,7 @@ export default {
       playurl: "",
       words: "",
       inputurl: "",
-      selected_platform: {
-        name: "qq"
-      },
+      selected_platform: {},
       preurl: "https://api.sigujx.com/jx/?url=",
       lists: "",
       vips: "",
@@ -190,19 +182,23 @@ export default {
         return false;
       }
       // eslint-disable-next-line no-console
-      console.log(that.selected_platform)
-      // eslint-disable-next-line no-console
+      // console.log(that.selected_platform, that.lists.find(item => item.name === that.selected_platform.name))
       that.selected_platform = that.lists.find(item => item.name === that.selected_platform.name);
+      this.selected_platform = that.selected_platform
+      // eslint-disable-next-line no-console
+      // console.log(that.selected_platform)
       let searchWord = that.selected_platform.value + words;
       that.url = searchWord;
       that.isplay = false;
       // 传得参数对象
       // eslint-disable-next-line
       let query = {
-        s_type: "iaiqi",
+        s_type: that.selected_platform.name,
         s_word: that.words
       }
-      this.axios.get("/zfeno-video/api/v1/search?s_type=iqiyi&s_word=" + that.words)
+      this.axios.get("/zfeno-video/api/v1/search", {
+            params: query
+          })
           .then((res) => {
             // eslint-disable-next-line no-console
             console.log(res.data)
@@ -268,6 +264,7 @@ export default {
       let {lists, vips} = DataList;
       this.lists = lists;
       this.vips = vips;
+      this.selected_platform = lists[0]
       // eslint-disable-next-line no-console
       console.log(this.lists)
     },
@@ -296,6 +293,67 @@ export default {
 </script>
 
 <style scoped>
+
+
+p.dotted {
+  border-style: dotted;
+}
+
+p.dashed {
+  border-style: dashed;
+}
+
+p.solid {
+  border-style: solid;
+}
+
+p.double {
+  border-style: double;
+}
+
+p.groove {
+  border-style: groove;
+}
+
+p.ridge {
+  border-style: ridge;
+}
+
+p.inset {
+  border-style: inset;
+}
+
+p.outset {
+  border-style: outset;
+}
+
+p.none {
+  border-style: none;
+}
+
+p.hidden {
+  border-style: hidden;
+}
+
+p.mix {
+  border-style: dotted dashed solid double;
+}
+
+.row-list {
+  margin-right: -15px;
+  margin-left: -15px;
+  position: absolute;
+  z-index: 1;
+  opacity: 0.8;
+  background-color: rgb(0 0 0);
+}
+
+.md-curtain-list {
+  min-height: 800px;
+  max-height: 800px;
+}
+
+
 #case3 {
   width: 100%;
   height: 800px;

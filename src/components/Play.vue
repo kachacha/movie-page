@@ -26,28 +26,18 @@
       <!--      </div>-->
       <div class="col-md-6">
         <div class="input-group mb-3">
+
+          <input v-model="playUrl" class="form-control" placeholder="请输入视频Url地址，点击空白区域播放" type="text"
+                 @keyup.enter="PlayVideo()">
           <div class="input-group-prepend">
-            <span class="input-group-text" @click="ClearUrl">清除URL</span>
-          </div>
-          <input v-model="playurl" class="form-control" placeholder="请输入视频Url地址，点击空白区域播放" type="text"
-                 @blur="PlayVideo()">
-          <div class="input-group-append">
-            <select v-model="preurl" class="input-group-text" @change="ChangePreUrl">
-              <option
-                v-for="item in vips"
-                :key="item.url"
-                :value="item.url"
-              >
-                {{ item.name }}
-              </option>
-            </select>
+            <span class="input-group-text" @click="PlayVideo()">播放</span>
           </div>
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row" v-show="isPlay">
       <div class="col-md-12" style="padding: 0px">
-        <iframe id="case3" allowfullscreen frameborder="0" v-bind:src="videourl"></iframe>
+        <iframe id="case3" allowfullscreen frameborder="0" v-bind:src="videoUrl"></iframe>
       </div>
     </div>
 
@@ -65,12 +55,83 @@
 </template>
 
 <script>
+
+import layer from "layui-layer";
+
 export default {
   name: "Play",
+  data() {
+    return {
+      // 播放的视频链接
+      playUrl: "",
+      // 解析链接
+      preUrl: "",
+      // 解析视频的链接
+      videoUrl: "",
+      // 播放窗口
+      isPlay: false
+    }
+  },
   created() {
     let aaa = this.$route.query
     // eslint-disable-next-line no-console
     console.log(aaa)
+  },
+  mounted() {
+    this.get_play_uri();
+    this.isPc();
+  },
+  methods: {
+    get_play_uri: function () {
+      this.axios.get("/zfeno-video/api/v1/analysis-plus")
+          .then((res) => {
+            // eslint-disable-next-line no-console
+            console.log(res.data)
+            this.isPlay = true;
+            layer.msg("解析成功，祝你观赏愉快！")
+          })
+          .catch(res => {
+            // eslint-disable-next-line no-console
+            console.log(res)
+            // 失败时候的操作
+          });
+    },
+    //播放视频
+    PlayVideo: function () {
+      const that = this;
+      if (that.playUrl === "") {
+        layer.open({
+          title: "提示！",
+          icon: 1,
+          content: '请复制视频URL到此处才能观看！',
+          time: 2000
+        });
+        return false;
+      }
+      that.videoUrl = that.preUrl + that.playUrl;
+      this.get_play_uri()
+    },
+
+    isPc() {
+      if (/AppleWebKit.*mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))) {
+        if (window.location.href.indexOf("?mobile") < 0) {
+          try {
+            if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+              // layer.alert('手机页面')
+              this.url = this.wapurl;
+            } else if (/iPad/i.test(navigator.userAgent)) {
+              // layer.alert('平板页面')
+            } else {
+              // layer.alert('其他移动端页面')
+            }
+          } catch (e) {
+            // eslint-disable-next-line no-console
+            console.log(e);
+          }
+        }
+
+      }
+    }
   }
 }
 </script>
