@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    //获取父页面传来的数据
+    console.log("22222222");
+    var roomId;
+    window.addEventListener('message', function (messageEvent) {
+        console.log("11111111");
+        console.log("getParentVulegetParentVulegetParentVulegetParentVulegetParentVulegetParentVule", messageEvent);
+        roomId = messageEvent.data;
+        $('#divCustomers1').html(roomId);
+    }, false);
+    // addEventListener("load", function () {
+    //     setTimeout(hideURLbar, 0);
+    // }, false);
+    //
+    // function hideURLbar() {
+    //     window.scrollTo(0, 1);
+    // }
+    //
+    // window.picerr = function (obj) {
+    //     obj.onerror = null;
+    //     obj.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQIW2NkAAIAAAoAAggA9GkAAAAASUVORK5CYII=';
+    // };
+</script>
+</html>

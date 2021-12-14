@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'http://127.0.0.1:5001' : 'http://127.0.0.1:5000'
-
+process.env.VUE_APP_BASE_URL = baseUrl
 
 module.exports = {
     configureWebpack: {
@@ -11,7 +11,10 @@ module.exports = {
                 jQuery: 'jquery',
                 'window.jQuery': 'jquery',
                 Popper: ['popper.js', 'default'],
-            })
+            }),
+            // new webpack.DefinePlugin({
+            //     'process.env': JSON.stringify({VUE_APP_BASS_URL1: baseUrl})
+            // })
         ],
     },
     // 所有 webpack-dev-server 的选项都支持

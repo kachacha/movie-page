@@ -46,30 +46,43 @@
         </div>
       </div>
     </div>
-    <div class="row" v-show="isplay == true">
+    <div class="input-group-append">
+      <span class="input-group-text" @click="sendMessage('123456789')">发送消息</span>
+    </div>
+    <div class="row" v-show="!phonePage">
       <div class="col-md-12" style="padding: 0px">
-        <iframe v-bind:src="videourl" frameborder="0" id="case3" allowfullscreen></iframe>
+        <iframe src="qq.html" frameborder="0" id="case1" allowfullscreen></iframe>
       </div>
     </div>
-
-    <div class="row row-list">
-      <div class="col-md-12 md-curtain-list">
-        <!-- 设置宽高然后进行配置 -->
-        <vue-scroll :ops="ops" style="width:100%; height:100%">
-          <div v-for="(item, v) in rawHtml" :key="v">
-            <!--          id值{{ item.uri }}-->
-            <!--          =>id值{{ v }}-->
-            <p class="outset" v-html="item.html">{{ item.html }}</p>
-          </div>
-        </vue-scroll>
-
-      </div>
-    </div>
-    <div class="row" style="opacity: 0.4;">
+    <div class="row" v-show="phonePage">
       <div class="col-md-12" style="padding: 0px">
-        <iframe v-bind:src="url" frameborder="0" id="case4"></iframe>
+        <iframe src="m_qq.html" frameborder="0" ref="m_qq" id="case2" allowfullscreen></iframe>
       </div>
     </div>
+    <!--    <div class="row" v-show="isplay == true">-->
+    <!--      <div class="col-md-12" style="padding: 0px">-->
+    <!--        <iframe v-bind:src="videourl" frameborder="0" id="case3" allowfullscreen></iframe>-->
+    <!--      </div>-->
+    <!--    </div>-->
+
+    <!--    <div class="row row-list">-->
+    <!--      <div class="col-md-12 md-curtain-list">-->
+    <!--        &lt;!&ndash; 设置宽高然后进行配置 &ndash;&gt;-->
+    <!--        <vue-scroll :ops="ops" style="width:100%; height:100%">-->
+    <!--          <div v-for="(item, v) in rawHtml" :key="v">-->
+    <!--            &lt;!&ndash;          id值{{ item.uri }}&ndash;&gt;-->
+    <!--            &lt;!&ndash;          =>id值{{ v }}&ndash;&gt;-->
+    <!--            <p class="outset" v-html="item.html">{{ item.html }}</p>-->
+    <!--          </div>-->
+    <!--        </vue-scroll>-->
+
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--    <div class="row" style="opacity: 0.4;">-->
+    <!--      <div class="col-md-12" style="padding: 0px">-->
+    <!--        <iframe v-bind:src="url" frameborder="0" id="case4"></iframe>-->
+    <!--      </div>-->
+    <!--    </div>-->
     <!--使用教程-->
     <!--    <div class="row" style="border-radius: 15px;background-color: white;margin-top:10px">-->
     <!--      <div class="col-md-12">-->
@@ -131,6 +144,8 @@ export default {
       rawHtml: "",
       url: "https://v.qq.com/biu/ranks/?t=hotsearch",
       wapurl: "https://m.v.qq.com/index.html",
+      // 手机版是否
+      phonePage: true,
       playurl: "",
       words: "",
       inputurl: "",
@@ -140,36 +155,38 @@ export default {
       vips: "",
       videourl: "",
       isplay: false,
+      // 当前页面属于什么环境类型 手机、电脑、ipad  ： m_*、w_*、i_*
+      page_type: "",
+      iframe: {}
     }
   },
   mounted() {
-
-    // 初始化页面之前获取图片验证码的接口，无需定义方法直接请求
-    // getImgCode()
-    //     .then(res => {
-    //       let blob = new Blob([res], { type: "image/jpeg" });
-    //       let url = URL.createObjectURL(blob);
-    //
-    //       this.ImgCode = url;
-    //     })
-    //     .catch(res => {
-    //       alert("网络开小差了，没有获取到图片验证码哦", res);
-    //     });
-
-
+    // eslint-disable-next-line no-console
+    console.log(process.env.VUE_APP_BASE_URL)
+    this.iframe = this.$refs.m_qq.contentWindow;
     this.getData();
     this.isPc();
   },
   methods: {
+    //给子页面传入数据
+    sendMessage: function (page_html) {
+      this.iframe.postMessage(
+          {
+            "page_type": this.page_type,
+            "page_html": page_html
+          },
+          '*'
+      );
+    },
     Demo: function () {
       // eslint-disable-next-line no-console
       // console.log(this.lists)
       // eslint-disable-next-line no-console
       console.log(this.selected_platform)
-    },
-    Search: function () {
       // eslint-disable-next-line no-console
       console.log(this.$Api.channelCompare)
+    },
+    Search: function () {
       let that = this;
       let words = that.words;
       if (words.length === 0) {
@@ -181,20 +198,20 @@ export default {
         });
         return false;
       }
+      this.selected_platform = that.selected_platform = that.lists.find(item => item.name === that.selected_platform.name);
       // eslint-disable-next-line no-console
-      // console.log(that.selected_platform, that.lists.find(item => item.name === that.selected_platform.name))
-      that.selected_platform = that.lists.find(item => item.name === that.selected_platform.name);
-      this.selected_platform = that.selected_platform
-      // eslint-disable-next-line no-console
-      // console.log(that.selected_platform)
       let searchWord = that.selected_platform.value + words;
       that.url = searchWord;
       that.isplay = false;
+
+
+
       // 传得参数对象
       // eslint-disable-next-line
       let query = {
-        s_type: that.selected_platform.name,
-        s_word: that.words
+        s_type: that.page_type + that.selected_platform.name,
+        s_word: that.words,
+        page: 1
       }
       this.axios.get("/zfeno-video/api/v1/search", {
             params: query
@@ -203,6 +220,7 @@ export default {
             // eslint-disable-next-line no-console
             console.log(res.data)
             this.rawHtml = res.data.data;
+            this.sendMessage(res.data.page_html);
           })
           .catch(res => {
             // eslint-disable-next-line no-console
@@ -273,18 +291,37 @@ export default {
         if (window.location.href.indexOf("?mobile") < 0) {
           try {
             if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-              // layer.alert('手机页面')
+              layer.alert('手机页面')
+              // 页面属性改为：m_
+              this.page_type = "m_"
+
+
+
+              this.phonePage = true
               this.url = this.wapurl;
             } else if (/iPad/i.test(navigator.userAgent)) {
-              // layer.alert('平板页面')
+              layer.alert('平板页面')
+              // 页面属性改为：i_
+              this.page_type = "i_"
             } else {
-              // layer.alert('其他移动端页面')
+              // 页面属性改为：w_
+              this.page_type = "w_"
+              layer.alert('其他移动端页面')
             }
           } catch (e) {
             // eslint-disable-next-line no-console
             console.log(e);
           }
         }
+
+      } else {
+        // 页面属性改为：w_
+        this.page_type = "w_"
+
+
+
+        this.phonePage = false
+        layer.alert('电脑')
 
       }
     }
@@ -353,6 +390,17 @@ p.mix {
   max-height: 800px;
 }
 
+#case1 {
+  width: 100%;
+  height: 800px;
+  border-radius: 10px;
+}
+
+#case2 {
+  width: 100%;
+  height: 800px;
+  border-radius: 10px;
+}
 
 #case3 {
   width: 100%;
