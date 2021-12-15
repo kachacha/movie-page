@@ -51,14 +51,15 @@
     </div>
     <div class="row" v-show="!phonePage">
       <div class="col-md-12" style="padding: 0px">
-        <iframe src="qq.html" frameborder="0" id="case1" allowfullscreen></iframe>
+        <iframe id="case1" ref="m_qq" allowfullscreen frameborder="0" referrerpolicy="no-referrer"
+                src="iqiyi.html"></iframe>
       </div>
     </div>
-    <div class="row" v-show="phonePage">
-      <div class="col-md-12" style="padding: 0px">
-        <iframe src="m_iqiyi.html" frameborder="0" ref="m_qq" referrerpolicy="no-referrer" id="case2" allowfullscreen></iframe>
-      </div>
-    </div>
+    <!--    <div class="row" v-show="phonePage">-->
+    <!--      <div class="col-md-12" style="padding: 0px">-->
+    <!--        <iframe src="iqiyi.html" frameborder="0" ref="m_qq" referrerpolicy="no-referrer" id="case2" allowfullscreen></iframe>-->
+    <!--      </div>-->
+    <!--    </div>-->
     <!--    <div class="row" v-show="isplay == true">-->
     <!--      <div class="col-md-12" style="padding: 0px">-->
     <!--        <iframe v-bind:src="videourl" frameborder="0" id="case3" allowfullscreen></iframe>-->
