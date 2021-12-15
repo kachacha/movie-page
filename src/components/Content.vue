@@ -56,7 +56,7 @@
     </div>
     <div class="row" v-show="phonePage">
       <div class="col-md-12" style="padding: 0px">
-        <iframe src="m_qq.html" frameborder="0" ref="m_qq" id="case2" allowfullscreen></iframe>
+        <iframe src="m_iqiyi.html" frameborder="0" ref="m_qq" referrerpolicy="no-referrer" id="case2" allowfullscreen></iframe>
       </div>
     </div>
     <!--    <div class="row" v-show="isplay == true">-->
@@ -169,10 +169,10 @@ export default {
   },
   methods: {
     //给子页面传入数据
-    sendMessage: function (page_html) {
+    sendMessage: function (page_type, page_html) {
       this.iframe.postMessage(
           {
-            "page_type": this.page_type,
+            "page_type": page_type,
             "page_html": page_html
           },
           '*'
@@ -220,7 +220,7 @@ export default {
             // eslint-disable-next-line no-console
             console.log(res.data)
             this.rawHtml = res.data.data;
-            this.sendMessage(res.data.page_html);
+            this.sendMessage(that.page_type + that.selected_platform.name, res.data.page_html);
           })
           .catch(res => {
             // eslint-disable-next-line no-console
