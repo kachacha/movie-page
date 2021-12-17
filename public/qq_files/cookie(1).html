@@ -1,13 +1,83 @@
-
 <!-- saved from url=(0042)https://video.qq.com/getcookie/cookie.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 </head>
 
 <body>
-  <!-- inject:js -->
-  <script type="text/javascript">!function(e){function t(i){if(o[i])return o[i].exports;var n=o[i]={exports:{},id:i,loaded:!1};return e[i].call(n.exports,n,n.exports,t),n.loaded=!0,n.exports}var o={};return t.m=e,t.c=o,t.p="",t(0)}([function(e,t){document.domain="qq.com",function(){function e(e){return 1==e&&(o.del("uin",".video.qq.com","/"),o.del("skey",".video.qq.com","/"),o.del("lskey",".video.qq.com","/"),o.del("luin",".video.qq.com","/")),{access_token:o.get("access_token"),appid:o.get("appid"),openid:o.get("openid"),vuserid:o.get("vuserid"),vusession:o.get("vusession"),vqq_access_token:o.get("vqq_access_token"),vqq_appid:o.get("vqq_appid"),vqq_openid:o.get("vqq_openid"),vqq_vuserid:o.get("vqq_vuserid"),vqq_vusession:o.get("vqq_vusession"),vqq_refresh_token:o.get("vqq_refresh_token"),main_login:o.get("main_login"),refresh_token:o.get("refresh_token"),refresh_timestamp:o.get("refresh_timestamp"),video_guid:o.get("video_guid"),video_platform:o.get("video_platform")}}function t(){function e(){return Math.floor(65536*(1+Math.random())).toString(16).substring(1)}return[e(),e(),e(),e()].join("")}var o={set:function(e,t,o,i,n){if(n){var s=new Date,r=new Date;r.setTime(s.getTime()+36e5*n)}return document.cookie=e+"="+t+"; "+(n?"expires="+r.toGMTString()+"; ":"")+(i?"path="+i+"; ":"path=/; ")+(o?"domain="+o+";":"domain="+window.location.host+";"),!0},setWithExpires:function(e,t,o,i,n){document.cookie=e+"="+t+"; "+(n?"expires="+n+"; ":"")+(i?"path="+i+"; ":"path=/; ")+(o?"domain="+o+";":"domain="+window.location.host+";")},get:function(e,t){var o=new RegExp("(?:^|;+|\\s+)"+e+"=([^;]*)"),i=(t||document.cookie).match(o);return i?i[1]:""},del:function(e,t,o){var i=new Date;i.setTime(i.getTime()-1),document.cookie=e+"=; expires="+i.toGMTString()+";"+(o?"path="+o+"; ":"path=/; ")+(t?"domain="+t+";":"domain="+window.location.host+";")}},i={getLogintime:function(){return{login_time_init:o.get("login_time_init"),login_time_last:o.get("login_time_init")}},setLogintime:function(e,t){if(3==e)o.del("login_time_init",".video.qq.com","/"),o.del("login_time_last",".video.qq.com","/");else{var i=t.getFullYear()+"-"+(t.getMonth()+1)+"-"+t.getDate()+" "+t.getHours()+":"+t.getMinutes()+":"+t.getSeconds();t.setTime(t.getTime()+31536e7),1==e?o.set("login_time_init",i,".video.qq.com","/",t.toGMTString()):2==e&&o.set("login_time_last",i,".video.qq.com","/",t.toGMTString())}},Cookie:o,getWxCookie:e,getCookie:e},n="video_guid",s=o.get(n);s||(s=t(),o.set(n,s,"",!1,87600)),o.set("video_platform",2,"",!1,87600),parent.window.loadVideoCookie&&parent.window.loadVideoCookie(i)}()}]);</script>
-  <!-- endinject -->
+<!-- inject:js -->
+<!--<script type="text/javascript">!function (e) {-->
+<!--    function t(i) {-->
+<!--        if (o[i]) return o[i].exports;-->
+<!--        var n = o[i] = {exports: {}, id: i, loaded: !1};-->
+<!--        return e[i].call(n.exports, n, n.exports, t), n.loaded = !0, n.exports-->
+<!--    }-->
+
+<!--    var o = {};-->
+<!--    return t.m = e, t.c = o, t.p = "", t(0)-->
+<!--}([function (e, t) {-->
+<!--    document.domain = "qq.com", function () {-->
+<!--        function e(e) {-->
+<!--            return 1 == e && (o.del("uin", ".video.qq.com", "/"), o.del("skey", ".video.qq.com", "/"), o.del("lskey", ".video.qq.com", "/"), o.del("luin", ".video.qq.com", "/")), {-->
+<!--                access_token: o.get("access_token"),-->
+<!--                appid: o.get("appid"),-->
+<!--                openid: o.get("openid"),-->
+<!--                vuserid: o.get("vuserid"),-->
+<!--                vusession: o.get("vusession"),-->
+<!--                vqq_access_token: o.get("vqq_access_token"),-->
+<!--                vqq_appid: o.get("vqq_appid"),-->
+<!--                vqq_openid: o.get("vqq_openid"),-->
+<!--                vqq_vuserid: o.get("vqq_vuserid"),-->
+<!--                vqq_vusession: o.get("vqq_vusession"),-->
+<!--                vqq_refresh_token: o.get("vqq_refresh_token"),-->
+<!--                main_login: o.get("main_login"),-->
+<!--                refresh_token: o.get("refresh_token"),-->
+<!--                refresh_timestamp: o.get("refresh_timestamp"),-->
+<!--                video_guid: o.get("video_guid"),-->
+<!--                video_platform: o.get("video_platform")-->
+<!--            }-->
+<!--        }-->
+
+<!--        function t() {-->
+<!--            function e() {-->
+<!--                return Math.floor(65536 * (1 + Math.random())).toString(16).substring(1)-->
+<!--            }-->
+
+<!--            return [e(), e(), e(), e()].join("")-->
+<!--        }-->
+
+<!--        var o = {-->
+<!--            set: function (e, t, o, i, n) {-->
+<!--                if (n) {-->
+<!--                    var s = new Date, r = new Date;-->
+<!--                    r.setTime(s.getTime() + 36e5 * n)-->
+<!--                }-->
+<!--                return document.cookie = e + "=" + t + "; " + (n ? "expires=" + r.toGMTString() + "; " : "") + (i ? "path=" + i + "; " : "path=/; ") + (o ? "domain=" + o + ";" : "domain=" + window.location.host + ";"), !0-->
+<!--            }, setWithExpires: function (e, t, o, i, n) {-->
+<!--                document.cookie = e + "=" + t + "; " + (n ? "expires=" + n + "; " : "") + (i ? "path=" + i + "; " : "path=/; ") + (o ? "domain=" + o + ";" : "domain=" + window.location.host + ";")-->
+<!--            }, get: function (e, t) {-->
+<!--                var o = new RegExp("(?:^|;+|\\s+)" + e + "=([^;]*)"), i = (t || document.cookie).match(o);-->
+<!--                return i ? i[1] : ""-->
+<!--            }, del: function (e, t, o) {-->
+<!--                var i = new Date;-->
+<!--                i.setTime(i.getTime() - 1), document.cookie = e + "=; expires=" + i.toGMTString() + ";" + (o ? "path=" + o + "; " : "path=/; ") + (t ? "domain=" + t + ";" : "domain=" + window.location.host + ";")-->
+<!--            }-->
+<!--        }, i = {-->
+<!--            getLogintime: function () {-->
+<!--                return {login_time_init: o.get("login_time_init"), login_time_last: o.get("login_time_init")}-->
+<!--            }, setLogintime: function (e, t) {-->
+<!--                if (3 == e) o.del("login_time_init", ".video.qq.com", "/"), o.del("login_time_last", ".video.qq.com", "/"); else {-->
+<!--                    var i = t.getFullYear() + "-" + (t.getMonth() + 1) + "-" + t.getDate() + " " + t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds();-->
+<!--                    t.setTime(t.getTime() + 31536e7), 1 == e ? o.set("login_time_init", i, ".video.qq.com", "/", t.toGMTString()) : 2 == e && o.set("login_time_last", i, ".video.qq.com", "/", t.toGMTString())-->
+<!--                }-->
+<!--            }, Cookie: o, getWxCookie: e, getCookie: e-->
+<!--        }, n = "video_guid", s = o.get(n);-->
+<!--        s || (s = t(), o.set(n, s, "", !1, 87600)), o.set("video_platform", 2, "", !1, 87600), parent.window.loadVideoCookie && parent.window.loadVideoCookie(i)-->
+<!--    }()-->
+<!--}]);</script>-->
+<!-- endinject -->
 
 
-</body></html>
+</body>
+</html>

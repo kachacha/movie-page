@@ -372,7 +372,7 @@ input[type=search]::-webkit-search-cancel-button{display:none}
 .search_match{padding:12px 10px 0;background:#efefef;font-size:14px;text-align:center}
 .search_match .hl{color:#ff6022}
 .mod_search{z-index:1;position:fixed;top:0;width:100%;padding:10px;background-color:#fff}
-.mod_search .logo_search{position:absolute;top:2px;left:0;width:75px;height:29px;overflow:hidden;/*! darkmode: {url(//puui.qpic.cn/vupload/0/1573027728294_o0mm001lza.png/0) 0 0/cover no-repeat} */background:url(/tencentvideo/vstyle/mobile/v2/style/img/common/search_logo.png) 0 0 no-repeat;background-size:cover;color:transparent;font-size:0}
+.mod_search .logo_search{position:absolute;top:2px;left:0;width:75px;height:29px;overflow:hidden;/*! darkmode: {url(//puui.qpic.cn/vupload/0/1573027728294_o0mm001lza.png/0) 0 0/cover no-repeat} */background:url(https://vm.gtimg.cn/tencentvideo/vstyle/mobile/v2/style/img/common/search_logo.png) 0 0 no-repeat;background-size:cover;color:transparent;font-size:0}
 .mod_search .search_box{position:relative;margin-right:38px;margin-left:83px;padding:1px;border-radius:33px;background:#03b0ff;background:-webkit-gradient(linear,left top,right top,color-stop(0,#5dcf0c),color-stop(30%,#2dbe8f),color-stop(100%,#03b0ff));background-clip:padding-box;background-image:linear-gradient(90deg,#5dcf0c 0,#2dbe8f 30%,#03b0ff);font-size:14px;line-height:33px}
 .search_box_inner{padding:0 10px;border-radius:33px;/*! darkmode: {#1a1a2d} */background-color:#fff}
 .mod_search .search_box .inp_text{width:100%;height:33px;padding:8px 20px 8px 0;border:none;background-color:transparent;font-size:14px;line-height:16px}

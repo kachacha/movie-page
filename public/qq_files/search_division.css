@@ -236,7 +236,7 @@ input:focus::-webkit-input-placeholder{color:#000;color:rgba(0,0,0,0)}
 .site_head_placeholder{display:block;height:68px}
 .page_channel_choice .site_head_placeholder{display:none}
 .site_logo{position:relative;width:135px;margin-top:16px;float:left;overflow:hidden}
-.site_logo .link_logo{display:block;width:135px;height:36px;background:url(/tencentvideo/vstyle/web/v6/style/img/common/sprite_head_logo.svg) 0 -36px no-repeat;text-indent:-300px}
+.site_logo .link_logo{display:block;width:135px;height:36px;background:url(https://vm.gtimg.cn/tencentvideo/vstyle/web/v6/style/img/common/sprite_head_logo.svg) 0 -36px no-repeat;text-indent:-300px}
 .site_head_absolute{position:absolute}
 .site_head_absolute .link_logo{-webkit-filter:drop-shadow(0 0 2px rgba(17,18,38,.2));filter:drop-shadow(0 0 2px rgba(17, 18, 38, .2))}
 .site_head_absolute .site_channel{display:none}

@@ -4,10 +4,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!--字体-->
-    <link rel="preload" referrerpolicy="no-referrer" href="https://static.iqiyi.com/ext/common/auraIcon2019031816/iconfont.ttf" as="font"
+    <link rel="preload" referrerpolicy="no-referrer"
+          href="https://static.iqiyi.com/ext/common/auraIcon2019031816/iconfont.ttf" as="font"
           crossorigin="anonymous">
     <!--首屏图标-->
-    <link rel="preload" referrerpolicy="no-referrer" href="https://www.iqiyipic.com/common/fix/h5-aura/iqiyi-logo.png" as="image">
+    <link rel="preload" referrerpolicy="no-referrer" href="https://www.iqiyipic.com/common/fix/h5-aura/iqiyi-logo.png"
+          as="image">
 
     <title>高清视频在线观看-爱奇艺搜索</title>
     <!-- 支持度95%+ -->
@@ -27,8 +29,8 @@
     <link rel="dns-prefetch" href="https://pic7.iqiyipic.com/">
     <link rel="dns-prefetch" href="https://cache.m.iqiyi.com/">
     <link rel="dns-prefetch" href="https://static.iqiyi.com/">
-<!--    <meta http-equiv="Content-Security-Policy"-->
-<!--          content="worker-src blob: &#39;self&#39; ; script-src &#39;self&#39; &#39;unsafe-inline&#39; &#39;unsafe-eval&#39; *.iqiyi.com *.baidu.com msg.qy.net zz.bdstatic.com *.iqiyipic.com">-->
+    <!--    <meta http-equiv="Content-Security-Policy"-->
+    <!--          content="worker-src blob: &#39;self&#39; ; script-src &#39;self&#39; &#39;unsafe-inline&#39; &#39;unsafe-eval&#39; *.iqiyi.com *.baidu.com msg.qy.net zz.bdstatic.com *.iqiyipic.com">-->
 
     <meta http-equiv="content-language" lang="zh-CN">
     <meta name="viewport"
@@ -48,7 +50,7 @@
     <script src="./m_iqiyi_files/cooksdk.js.下载" async=""></script>
     <script src="./m_iqiyi_files/push.js.下载"></script>
     <script src="./m_iqiyi_files/x.js.下载"></script>
-    <script src="./m_iqiyi_files/hm.js.下载"></script>
+    <!--    <script src="./m_iqiyi_files/hm.js.下载"></script>-->
     <script type="text/javascript">
         // document.domain = 'iqiyi.com' || document.domain
     </script>
@@ -59,26 +61,98 @@
 
     <link type="text/css" href="./m_iqiyi_files/h5-search.css" rel="stylesheet">
 
-<!--    <link rel="preload" href="./m_iqiyi_files/chunk-vendors.ceacd93d.js.下载" as="script">-->
-<!--    <link rel="preload" href="./m_iqiyi_files/main.916adf58.js.下载" as="script">-->
-<!--    <link rel="preload" href="./m_iqiyi_files/apps.70ab1ca3.js.下载" as="script">-->
-<!--    <link rel="preload" href="./m_iqiyi_files/chunk-common.e1ed8ccc.js.下载" as="script">-->
+    <!--    <link rel="preload" href="./m_iqiyi_files/chunk-vendors.ceacd93d.js.下载" as="script">-->
+    <!--    <link rel="preload" href="./m_iqiyi_files/main.916adf58.js.下载" as="script">-->
+    <!--    <link rel="preload" href="./m_iqiyi_files/apps.70ab1ca3.js.下载" as="script">-->
+    <!--    <link rel="preload" href="./m_iqiyi_files/chunk-common.e1ed8ccc.js.下载" as="script">-->
     <script src="https://cdn.static.runoob.com/libs/jquery/1.8.3/jquery.js"></script>
 
 </head>
 
 <body>
 
-<div id="app" data-theme=""><!---->
+<div id="app">
     <div>
+        <section class="m-header-search m-search-page">
+            <hgroup class="fixed_top">
+                <div class="m-search-full-bgfff">
+                    <div class="header-search-box"><a href="/" title="爱奇艺" class="logo-iqiyi"></a>
+                        <div class="header-searchInput">
+                            <div class="search-input">
+                                风起洛阳
+                            </div>
+                            <i class="c-glyphicon c-glyphicon-search"></i></div>
+                        <div class="header-searchBtn">
+                            <div><a href="javascript:void(0);" class="c-btn btn-cancle">
+                                取消
+                            </a></div>
+                        </div>
+                    </div>
+                </div>
+            </hgroup>
+        </section>
+        <div class="m-search-full" style="display:none;">
+            <section class="m-header-search m-search-page">
+                <div class="header-search-box"><a href="/" title="爱奇艺" class="logo-iqiyi"></a>
+                    <div class="header-searchInput">
+                        <form action="javascript:void(0);"><input placeholder="" type="search" autovalue=""
+                                                                  autocomplete="off" value="" class="search-input"><a
+                                href="javascript:void(0);" class=""><i class="c-glyphicon c-glyphicon-search"></i></a><a
+                                href="javascript:void(0);" class=""><i class="c-glyphicon c-glyphicon-close"
+                                                                       style="display:none;"></i></a></form>
+                    </div>
+                    <div class="header-searchBtn"><a href="javascript:void(0);" class="c-btn btn-search"
+                                                     style="display:none;">搜索</a>
+                        <div style="display:none;"><a href="javascript:void(0);" class="c-btn btn-cancle">取消</a></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="header-search-suggest">
+                        <ul class="list-suggest" style="display:none;"></ul>
+                        <div style="display:none;">
+                            <div class="search-item" style="">
+                                <div class="search-title">
+                                    <div class="c-title">搜索历史</div>
+                                    <a href="javascript:void(0)" class="c-clearRecord">清空记录</a></div>
+                                <div class="search-list"><a href="javascript:void(0)" class="c-link">风起洛阳</a><a
+                                        href="javascript:void(0)" class="c-link">雪</a><a href="javascript:void(0)"
+                                                                                         class="c-link">不惑之旅</a></div>
+                            </div>
+                            <div class="search-item search-hot-item" style="display:none;">
+                                <div class="search-title">
+                                    <div class="c-title">热门搜索</div>
+                                </div>
+                                <div class="search-list"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+
+
+        <!-- todo 选手-->
         <div id="divCustomers"></div>
-        <div id="m_iqiyi"></div>
+        <div id="m_iqiyi" data-theme=""><!---->
+
+
+
+
+
+
+
     </div>
-    <div><a style="display: block !important;"></a>
-        <div></div><!---->
-        <div></div>
-        <div></div>
-    </div>
+</div>
+
+
+
+</div>
+<div><a style="display: block !important;"></a>
+    <div></div><!---->
+    <div></div>
+    <div></div>
 </div>
 
 <script defer="" src="./m_iqiyi_files/chunk-vendors.ceacd93d.js.下载"></script>
@@ -95,7 +169,7 @@
         if (messageEvent.source !== window.parent) return;
         const data = messageEvent.data;
         console.log("vue传递的数据为：", data);
-        if(data.page_type !== "m_iqiyi") return;
+        if (data.page_type !== "m_iqiyi") return;
         //下面可以调用我们html页面js中的方法，使用传递的数据进行操作了
         $('#m_iqiyi').html(data.page_html);
 
@@ -103,11 +177,10 @@
 </script>
 <!-- 页脚 结束 -->
 <script>
-    $.getJSON("https://www.runoob.com/try/ajax/jsonp.php?jsoncallback=?", function(data) {
+    $.getJSON("https://www.runoob.com/try/ajax/jsonp.php?jsoncallback=?", function (data) {
 
         var html = '<ul>';
-        for(var i = 0; i < data.length; i++)
-        {
+        for (var i = 0; i < data.length; i++) {
             html += '<li>' + data[i] + '</li>';
         }
         html += '</ul>';

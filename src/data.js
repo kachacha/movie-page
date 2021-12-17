@@ -5,7 +5,8 @@ let DataList = {
             value: "https://v.qq.com/x/search/?q=",
             wapurl: "https://m.v.qq.com/index.html",
             selected: true,
-            label: "腾讯视频"
+            label: "腾讯视频",
+            page: ""
         },
         {name: "youku", value: "https://so.youku.com/search_video/q_", wapurl: "", selected: false, label: "优酷视频"},
         {name: "iqiyi", value: "https://so.iqiyi.com/so/q_", wapurl: "", elected: false, label: "爱奇艺视频"}

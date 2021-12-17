@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div :class="'container ' + backColorClass">
     <div class="row">
       <div class="col-md-6">
         <div class="input-group mb-3">
@@ -49,15 +49,15 @@
     <div class="input-group-append">
       <span class="input-group-text" @click="sendMessage('123456789')">发送消息</span>
     </div>
-    <div class="row" v-show="!phonePage">
+    <div class="row">
       <div class="col-md-12" style="padding: 0px">
-        <iframe id="case1" ref="m_qq" allowfullscreen frameborder="0" referrerpolicy="no-referrer"
-                src="iqiyi.html"></iframe>
+        <iframe id="case1" ref="page_iframe" allowfullscreen frameborder="0" referrerpolicy="no-referrer"
+                :src="'w_youku.html'"></iframe>
       </div>
     </div>
-    <!--    <div class="row" v-show="phonePage">-->
+    <!--    <div class="row" v-show="phonePage">      this.page_type + this.selected_platform.name +      -->
     <!--      <div class="col-md-12" style="padding: 0px">-->
-    <!--        <iframe src="iqiyi.html" frameborder="0" ref="m_qq" referrerpolicy="no-referrer" id="case2" allowfullscreen></iframe>-->
+    <!--        <iframe src="w_iqiyi.html" frameborder="0" ref="m_qq" referrerpolicy="no-referrer" id="case2" allowfullscreen></iframe>-->
     <!--      </div>-->
     <!--    </div>-->
     <!--    <div class="row" v-show="isplay == true">-->
@@ -128,6 +128,7 @@ export default {
   name: "Content",
   data() {
     return {
+      backColorClass: "",
       ops: {
         vuescroll: {},
         scrollPanel: {},
@@ -164,7 +165,7 @@ export default {
   mounted() {
     // eslint-disable-next-line no-console
     console.log(process.env.VUE_APP_BASE_URL)
-    this.iframe = this.$refs.m_qq.contentWindow;
+    this.iframe = this.$refs.page_iframe.contentWindow;
     this.getData();
     this.isPc();
   },
@@ -200,6 +201,11 @@ export default {
         return false;
       }
       this.selected_platform = that.selected_platform = that.lists.find(item => item.name === that.selected_platform.name);
+      if (this.selected_platform.name === "iqiyi"){
+        this.backColorClass = "backgroundColorBlueToAli";
+      } else {
+        this.backColorClass = "backgroundColorAliToBlue";
+      }
       // eslint-disable-next-line no-console
       let searchWord = that.selected_platform.value + words;
       that.url = searchWord;
@@ -331,6 +337,60 @@ export default {
 </script>
 
 <style scoped>
+
+/* 背景动态变化   - 白变蓝 */
+.backgroundColorAliToBlue {
+  /*height: 50px;*/
+  /*width: 50px;*/
+  background: #2c3e50;
+  animation: aliToBlue 3s infinite;
+  animation-fill-mode:forwards;
+
+  /* Safari 和 Chrome */
+  -webkit-animation:aliToBlue 3s;
+  -webkit-animation-iteration-count:1;
+  -webkit-animation-fill-mode:forwards;
+}
+
+@keyframes aliToBlue
+{
+  from {background: aliceblue;}
+  to {background: #2c3e50;}
+}
+/* Safari and Chrome */
+@-webkit-keyframes aliToBlue
+{
+  from {background: aliceblue;}
+  to {background: #2c3e50;}
+}
+
+/* 背景动态变化  - 蓝变白 */
+.backgroundColorBlueToAli {
+  /*height: 50px;*/
+  /*width: 50px;*/
+  background: aliceblue;
+  animation: blueToAli 3s infinite;
+  animation-fill-mode:forwards;
+
+  /* Safari 和 Chrome */
+  -webkit-animation:blueToAli 3s;
+  -webkit-animation-iteration-count:1;
+  -webkit-animation-fill-mode:forwards;
+}
+
+@keyframes blueToAli
+{
+  from {background: #2c3e50;}
+  to {background: aliceblue;}
+}
+/* Safari and Chrome */
+@-webkit-keyframes blueToAli
+{
+  from {background: #2c3e50;}
+  to {background: aliceblue;}
+}
+
+
 
 
 p.dotted {
