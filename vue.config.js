@@ -1,9 +1,11 @@
 const webpack = require('webpack');
 
-const baseUrl = process.env.NODE_ENV === 'production' ? 'http://49.234.34.225:5000' : 'http://49.234.34.225:5000'
+const baseUrl = process.env.NODE_ENV === 'production' ? 'http://49.234.34.225:5000' : 'http://127.0.0.1:5000'
 process.env.VUE_APP_BASE_URL = baseUrl
 
 module.exports = {
+    // 部署应用时的基本 URL
+    // publicPath: baseUrl,
     configureWebpack: {
         plugins: [
             new webpack.ProvidePlugin({
@@ -35,8 +37,6 @@ module.exports = {
         host: 'localhost',
         port: '8081'
     },
-    // 部署应用时的基本 URL
-    // publicPath: process.env.NODE_ENV === 'production' ? '192.168.60.111:8080' : '192.168.60.110:8080',
 
 
     // build时构建文件的目录 构建时传入 --no-clean 可关闭该行为

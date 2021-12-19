@@ -220,9 +220,9 @@ export default {
         s_word: that.words,
         page: 1
       }
-      this.axios.get("/zfeno-video/api/v1/search", {
-            params: query
-          })
+      this.axios.get("http://49.234.34.225:5000/zfeno-video/api/v1/search", {
+        params: query
+      })
           .then((res) => {
             // eslint-disable-next-line no-console
             console.log(res.data)

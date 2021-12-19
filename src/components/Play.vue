@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     get_play_uri: function () {
-      this.axios.get("/zfeno-video/api/v1/analysis-plus")
+      this.axios.get("http://49.234.34.225:5000/zfeno-video/api/v1/analysis-plus")
           .then((res) => {
             // eslint-disable-next-line no-console
             console.log(res.data.code)
