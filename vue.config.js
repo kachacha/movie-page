@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 
-const baseUrl = process.env.NODE_ENV === 'production' ? 'http://127.0.0.1:5001' : 'http://127.0.0.1:5000'
+const baseUrl = process.env.NODE_ENV === 'production' ? 'http://127.0.0.1:5001' : 'http://49.234.34.225:5000'
 process.env.VUE_APP_BASE_URL = baseUrl
 
 module.exports = {
