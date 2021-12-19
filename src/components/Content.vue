@@ -52,7 +52,7 @@
     <div class="row">
       <div class="col-md-12" style="padding: 0px">
         <iframe id="case1" ref="page_iframe" allowfullscreen frameborder="0" referrerpolicy="no-referrer"
-                :src="'w_youku.html'"></iframe>
+                :src="this.page_type + this.selected_platform.name + '.html'"></iframe>
       </div>
     </div>
     <!--    <div class="row" v-show="phonePage">      this.page_type + this.selected_platform.name +      -->
