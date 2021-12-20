@@ -1089,6 +1089,16 @@
         $('#w_qq').html(data.page_html);
 
     }, false);
+
+    // 给父页面发消息
+    function toPlayMessage(va_uri) {
+        window.parent.postMessage({
+            cmd: "video_content",
+            params: {
+                play_uri: va_uri
+            }
+        }, "*");
+    }
 </script>
 <!-- 页脚 结束 -->
 <script>
@@ -1096,7 +1106,7 @@
 
         var html = '<ul>';
         for (var i = 0; i < data.length; i++) {
-            html += '<li><a href="javascript:fun(\"123\")">我是a标签</a>' + data[i] + '</li>';
+            html += "<li><a href='javascript:toPlayMessage(\"123445566\")' >我是a标签</a>" + data[i] + '</li>';
         }
         html += '</ul>';
         console.log("getParentVulegetParentVulegetParentVulegetParentVulegetParentVulegetParentVule", html);
@@ -1104,9 +1114,7 @@
 
     });
 
-    function fun(va) {
 
-    }
 
 
 </script>

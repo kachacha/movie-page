@@ -26,7 +26,6 @@
       <!--      </div>-->
       <div class="col-md-6">
         <div class="input-group mb-3">
-
           <input v-model="playUrl" class="form-control" placeholder="请输入视频Url地址，点击空白区域播放" type="text"
                  @keyup.enter="playVideo()">
           <div class="input-group-prepend">
@@ -62,6 +61,8 @@ export default {
   name: "Play",
   data() {
     return {
+      getQuery: {},
+      getQueryParams: {},
       // 播放的视频链接
       playUrl: "",
       // 解析链接
@@ -73,12 +74,16 @@ export default {
     }
   },
   created() {
-    let getQuery = this.$route.query
+    this.getQuery = this.$route.query
+    this.getQueryParams = this.$route.params
     // eslint-disable-next-line no-console
-    // console.log(getQuery.play_uri)
+    // console.log(this.getQuery, this.getQueryParams)
     // eslint-disable-next-line valid-typeof
-    if (typeof (getQuery.play_uri) !== "undefined") {
-      this.playUrl = getQuery.play_uri
+    if (typeof (this.getQuery.play_uri) !== "undefined") {
+      this.playUrl = this.getQuery.play_uri
+    }
+    if (typeof (this.getQueryParams.play_uri) !== "undefined") {
+      this.playUrl = this.getQueryParams.play_uri
     }
     // eslint-disable-next-line no-console
     // console.log(this.playUrl)
@@ -91,7 +96,7 @@ export default {
   },
   methods: {
     get_play_uri: function () {
-      this.axios.get("http://49.234.34.225:5000/zfeno-video/api/v1/analysis-plus")
+      this.axios.get(process.env.VUE_APP_BASE_URL + "/zfeno-video/api/v1/analysis-plus")
           .then((res) => {
             // eslint-disable-next-line no-console
             console.log(res.data.code)

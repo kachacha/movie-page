@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 
-const baseUrl = process.env.NODE_ENV === 'production' ? 'http://49.234.34.225:5000' : 'http://127.0.0.1:5000'
+const baseUrl = process.env.NODE_ENV === 'production' ? 'http://49.234.34.225:5000' : ''
 process.env.VUE_APP_BASE_URL = baseUrl
 
 module.exports = {
@@ -23,7 +23,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/zfeno-video': {
-                target: baseUrl,//代理地址，这里设置的地址会代替axios中设置的baseURL
+                target: "http://127.0.0.1:5000",//代理地址，这里设置的地址会代替axios中设置的baseURL
                 changeOrigin: true,// 如果接口跨域，需要进行这个参数配置
                 //ws: true, // proxy websockets
                 //pathRewrite方法重写url

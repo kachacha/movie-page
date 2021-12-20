@@ -425,6 +425,16 @@
         $('#m_qq').html(data.page_html);
 
     }, false);
+
+    // 给父页面发消息
+    function toPlayMessage(va_uri) {
+        window.parent.postMessage({
+            cmd: "video_content",
+            params: {
+                play_uri: va_uri
+            }
+        }, "*");
+    }
 </script>
 <!-- 页脚 结束 -->
 <script>

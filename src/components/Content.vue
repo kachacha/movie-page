@@ -166,6 +166,7 @@ export default {
     // eslint-disable-next-line no-console
     console.log(process.env.VUE_APP_BASE_URL)
     this.iframe = this.$refs.page_iframe.contentWindow;
+    window.addEventListener("message", this.handleMessage);
     this.getData();
     this.isPc();
   },
@@ -179,6 +180,20 @@ export default {
           },
           '*'
       );
+    },
+    // 解析iframe内部发回来的数据
+    handleMessage(event) {
+      const data = event.data;
+      switch (data.cmd) {
+        case "video_content":
+          // 业务逻辑
+          console.log("1234655", data.params);
+          //带参数跳转
+          // this.$router.push({path:'/Play',query:{play_uri:data.params.va_uri}});
+          const newPlay = this.$router.resolve({path:'/play', query: data.params});
+          window.open(newPlay.href,'_blank')
+          break;
+      }
     },
     Demo: function () {
       // eslint-disable-next-line no-console
@@ -220,7 +235,7 @@ export default {
         s_word: that.words,
         page: 1
       }
-      this.axios.get("http://49.234.34.225:5000/zfeno-video/api/v1/search", {
+      this.axios.get(process.env.VUE_APP_BASE_URL + "/zfeno-video/api/v1/search", {
         params: query
       })
           .then((res) => {
