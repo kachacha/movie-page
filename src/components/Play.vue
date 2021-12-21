@@ -24,15 +24,15 @@
       <!--          </div>-->
       <!--        </div>-->
       <!--      </div>-->
-      <div class="col-md-6">
-        <div class="input-group mb-3">
-          <input v-model="playUrl" class="form-control" placeholder="请输入视频Url地址，点击空白区域播放" type="text"
-                 @keyup.enter="playVideo()">
-          <div class="input-group-prepend">
-            <span class="input-group-text" @click="playVideo()">播放</span>
-          </div>
-        </div>
-      </div>
+<!--      <div class="col-md-6">-->
+<!--        <div class="input-group mb-3">-->
+<!--          <input v-model="playUrl" class="form-control" placeholder="请输入视频Url地址，点击空白区域播放" type="text"-->
+<!--                 @keyup.enter="playVideo()">-->
+<!--          <div class="input-group-prepend">-->
+<!--            <span class="input-group-text" @click="playVideo()">播放</span>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
     <div class="row" v-show="isPlay">
       <div class="col-md-12" style="padding: 0px">

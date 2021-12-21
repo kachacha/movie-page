@@ -1,53 +1,52 @@
 <template>
   <div :class="'container ' + backColorClass">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <select v-model="selected_platform" class="input-group-text">
-              <option
-                  v-for="list in lists"
-                  :key="list.name"
-                  :value="list"
-              >
-                {{ list.label }}
-              </option>
-            </select>
-          </div>
-          <input v-model="words" class="form-control" placeholder="请输入电影名。随便点击空白处搜索" type="text" @blur="Search()">
-          <div class="input-group-append">
-            <span class="input-group-text" @click="Search">搜索</span>
-          </div>
-          <!--          <div class="input-group-append">-->
-          <!--                  <span class="input-group-text" @click="ClearKeyWord">清除关键词<span-->
-          <!--                      style="color: red">{{ words.substring(0, 4) }}</span></span>-->
-          <!--          </div>-->
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" @click="ClearUrl">清除URL</span>
-          </div>
-          <input v-model="playurl" class="form-control" placeholder="请输入视频Url地址，点击空白区域播放" type="text"
-                 @blur="PlayVideo()">
-          <div class="input-group-append">
-            <select v-model="preurl" class="input-group-text" @change="ChangePreUrl">
-              <option
-                  v-for="item in vips"
-                  :key="item.url"
-                  :value="item.url"
-              >
-                {{ item.name }}
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
+<!--    <div class="row">-->
+<!--      <div class="col-md-6">-->
+<!--        <div class="input-group mb-3">-->
+<!--          <div class="input-group-prepend">-->
+<!--            <select v-model="selected_platform" class="input-group-text">-->
+<!--              <option-->
+<!--                  v-for="list in lists"-->
+<!--                  :key="list.name"-->
+<!--                  :value="list"-->
+<!--              >-->
+<!--                {{ list.label }}-->
+<!--              </option>-->
+<!--            </select>-->
+<!--          </div>-->
+<!--          <input v-model="words" class="form-control" placeholder="请输入电影名。随便点击空白处搜索" type="text" @blur="Search()">-->
+<!--          <div class="input-group-append">-->
+<!--            <span class="input-group-text" @click="Search">搜索</span>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+    <div style="margin-top: 15px;">
+      <el-input placeholder="请输入搜索内容" v-model="words" class="input-with-select" @change="Search">
+        <el-select v-model="selected_value" slot="prepend" placeholder="ps:(默认腾讯)" @change="set_selected_platform()">
+          <el-option
+              v-for="item in lists"
+              :key="item.name"
+              :label="item.label"
+              :value="item.name">
+          </el-option>
+        </el-select>
+        <el-button slot="append" icon="el-icon-search" @click="Search"></el-button>
+      </el-input>
     </div>
-    <div class="input-group-append">
-      <span class="input-group-text" @click="sendMessage('123456789')">发送消息</span>
+    <!--使用教程-->
+    <div class="row" style="border-radius: 15px;background-color: white;margin-top:10px; margin-bottom: 10px">
+      <div class="col-md-12">
+        <div class="text-center">
+          <h2 style="margin-top:5px">vip解析使用教程</h2>
+          <hr style="width: 90%;">
+        </div>
+      </div>
+      <div class="col-md-8 text-left">
+        <p style="color: red">解析线路来自网络收集,如有侵权请及时联系站长删除</p>
+        <p>ps、输入框输入关键词，回车或点击”搜索“按钮即可搜索</p>
+        <p>ps、在搜索结果中，点击想要看的视频，将直接跳转至播放页</p>
+      </div>
     </div>
     <div class="row">
       <div class="col-md-12" style="padding: 0px">
@@ -55,57 +54,7 @@
                 :src="this.page_type + this.selected_platform.name + '.html'"></iframe>
       </div>
     </div>
-    <!--    <div class="row" v-show="phonePage">      this.page_type + this.selected_platform.name +      -->
-    <!--      <div class="col-md-12" style="padding: 0px">-->
-    <!--        <iframe src="w_iqiyi.html" frameborder="0" ref="m_qq" referrerpolicy="no-referrer" id="case2" allowfullscreen></iframe>-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <!--    <div class="row" v-show="isplay == true">-->
-    <!--      <div class="col-md-12" style="padding: 0px">-->
-    <!--        <iframe v-bind:src="videourl" frameborder="0" id="case3" allowfullscreen></iframe>-->
-    <!--      </div>-->
-    <!--    </div>-->
 
-    <!--    <div class="row row-list">-->
-    <!--      <div class="col-md-12 md-curtain-list">-->
-    <!--        &lt;!&ndash; 设置宽高然后进行配置 &ndash;&gt;-->
-    <!--        <vue-scroll :ops="ops" style="width:100%; height:100%">-->
-    <!--          <div v-for="(item, v) in rawHtml" :key="v">-->
-    <!--            &lt;!&ndash;          id值{{ item.uri }}&ndash;&gt;-->
-    <!--            &lt;!&ndash;          =>id值{{ v }}&ndash;&gt;-->
-    <!--            <p class="outset" v-html="item.html">{{ item.html }}</p>-->
-    <!--          </div>-->
-    <!--        </vue-scroll>-->
-
-    <!--      </div>-->
-    <!--    </div>-->
-    <!--    <div class="row" style="opacity: 0.4;">-->
-    <!--      <div class="col-md-12" style="padding: 0px">-->
-    <!--        <iframe v-bind:src="url" frameborder="0" id="case4"></iframe>-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <!--使用教程-->
-    <!--    <div class="row" style="border-radius: 15px;background-color: white;margin-top:10px">-->
-    <!--      <div class="col-md-12">-->
-    <!--        <div class="text-center">-->
-    <!--          <h2 style="margin-top:5px">vip解析使用教程</h2>-->
-    <!--          <hr style="width: 90%;">-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--      <div class="col-md-4">-->
-    <!--        <a href="#" data-toggle="tooltip" title="点击图片观看视频教程!" @click="PcDemo">-->
-    <!--          <img src="/images/orangbus.png" alt="" style="width: 180px;height: 180px;">-->
-    <!--          &lt;!&ndash;                    <p><a  @click="PcDemo">Pc演示</a> | <a  @click="MobDemo">手机演示</a></p>&ndash;&gt;-->
-    <!--        </a>-->
-    <!--      </div>-->
-    <!--      <div class="col-md-8 text-left">-->
-    <!--        <p style="color: red">解析线路来自网络收集,如有侵权请及时联系站长删除</p>-->
-    <!--        <p>1、左侧输入框输入关键词，点击空白即可搜索</p>-->
-    <!--        <p>2、在搜索结果中，右键复制视频地址</p>-->
-    <!--        <p>3、右侧输入框粘贴刚刚复制的视频地址，随意点击空白区域即可观看</p>-->
-    <!--        <p>4、不能播放请尝试其他线路，我们支持的平台有</p>-->
-    <!--      </div>-->
-    <!--    </div>-->
     <!--支持平台-->
     <div class="row" style="border-radius: 15px;background-color: white;margin-top:10px">
       <div class="col-md-12">
@@ -144,19 +93,11 @@ export default {
         }
       },
       rawHtml: "",
-      url: "https://v.qq.com/biu/ranks/?t=hotsearch",
-      wapurl: "https://m.v.qq.com/index.html",
-      // 手机版是否
-      phonePage: true,
-      playurl: "",
       words: "",
-      inputurl: "",
+      // 选择列表值 - 属性
+      selected_value: "",
       selected_platform: {},
-      preurl: "https://api.sigujx.com/jx/?url=",
       lists: "",
-      vips: "",
-      videourl: "",
-      isplay: false,
       // 当前页面属于什么环境类型 手机、电脑、ipad  ： m_*、w_*、i_*
       page_type: "",
       iframe: {}
@@ -190,23 +131,20 @@ export default {
           console.log("1234655", data.params);
           //带参数跳转
           // this.$router.push({path:'/Play',query:{play_uri:data.params.va_uri}});
-          const newPlay = this.$router.resolve({path:'/play', query: data.params});
-          window.open(newPlay.href,'_blank')
+          const newPlay = this.$router.resolve({path: '/play', query: data.params});
+          window.open(newPlay.href, '_blank')
           break;
       }
     },
-    Demo: function () {
-      // eslint-disable-next-line no-console
-      // console.log(this.lists)
-      // eslint-disable-next-line no-console
+    // 改变选择全局搜索模态框
+    set_selected_platform () {
+      this.selected_platform = this.lists.find(item => item.name === this.selected_value);
       console.log(this.selected_platform)
-      // eslint-disable-next-line no-console
-      console.log(this.$Api.channelCompare)
     },
     Search: function () {
-      let that = this;
-      let words = that.words;
-      if (words.length === 0) {
+      // let that = this;
+      // let words = that.words;
+      if (this.words.length === 0) {
         layer.open({
           title: "提示！",
           icon: 1,
@@ -215,24 +153,19 @@ export default {
         });
         return false;
       }
-      this.selected_platform = that.selected_platform = that.lists.find(item => item.name === that.selected_platform.name);
-      if (this.selected_platform.name === "iqiyi"){
+      // this.selected_platform = that.selected_platform = that.lists.find(item => item.name === that.selected_platform.name);
+      // 改变背景颜色
+      if (this.selected_platform.name === "iqiyi") {
         this.backColorClass = "backgroundColorBlueToAli";
       } else {
         this.backColorClass = "backgroundColorAliToBlue";
       }
-      // eslint-disable-next-line no-console
-      let searchWord = that.selected_platform.value + words;
-      that.url = searchWord;
-      that.isplay = false;
-
-
 
       // 传得参数对象
       // eslint-disable-next-line
       let query = {
-        s_type: that.page_type + that.selected_platform.name,
-        s_word: that.words,
+        s_type: this.page_type + this.selected_platform.name,
+        s_word: this.words,
         page: 1
       }
       this.axios.get(process.env.VUE_APP_BASE_URL + "/zfeno-video/api/v1/search", {
@@ -242,7 +175,7 @@ export default {
             // eslint-disable-next-line no-console
             console.log(res.data)
             this.rawHtml = res.data.data;
-            this.sendMessage(that.page_type + that.selected_platform.name, res.data.page_html);
+            this.sendMessage(this.page_type + this.selected_platform.name, res.data.page_html);
           })
           .catch(res => {
             // eslint-disable-next-line no-console
@@ -257,57 +190,14 @@ export default {
       layer.msg("关键词清除成功！");
       return false;
     },
-    //播放视频
-    PlayVideo: function () {
-      const that = this;
-      if (that.playurl == "") {
-        layer.open({
-          title: "提示！",
-          icon: 1,
-          content: '请复制视频URL到此处才能观看！',
-          time: 2000
-        });
-        return false;
-      }
-      that.videourl = that.preurl + that.playurl;
-      that.isplay = true;
-
-      layer.msg("解析成功，祝你观赏愉快！")
-    },
-    //清除视频URL地址
-    ClearUrl: function () {
-      const that = this;
-      that.playurl = "";
-      layer.msg("URL清除成功")
-    },
-    ChangePreUrl: function () {
-      const that = this;
-      if (that.playurl === "") {
-        return false;
-      } else {
-        this.videourl = that.preurl + that.playurl;
-        layer.msg("成功切换！")
-      }
-    },
-    PcDemo() {
-      layer.open({
-        type: 2,
-        title: false,
-        area: ['630px', '360px'],
-        shade: 0.8,
-        closeBtn: 0,
-        shadeClose: true,
-        content: '//player.youku.com/embed/XMjY3MzgzODg0'
-      });
-    },
     getData() {
       let {lists, vips} = DataList;
       this.lists = lists;
-      this.vips = vips;
       this.selected_platform = lists[0]
       // eslint-disable-next-line no-console
       console.log(this.lists)
     },
+
     isPc() {
       if (/AppleWebKit.*mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))) {
         if (window.location.href.indexOf("?mobile") < 0) {
@@ -317,10 +207,6 @@ export default {
               // 页面属性改为：m_
               this.page_type = "m_"
 
-
-
-              this.phonePage = true
-              this.url = this.wapurl;
             } else if (/iPad/i.test(navigator.userAgent)) {
               layer.alert('平板页面')
               // 页面属性改为：i_
@@ -340,9 +226,6 @@ export default {
         // 页面属性改为：w_
         this.page_type = "w_"
 
-
-
-        this.phonePage = false
         layer.alert('电脑')
 
       }
@@ -351,32 +234,45 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
+.el-select .el-input {
+  width: 130px;
+}
+.input-with-select .el-input-group__prepend {
+  background-color: #fff;
+}
 /* 背景动态变化   - 白变蓝 */
 .backgroundColorAliToBlue {
   /*height: 50px;*/
   /*width: 50px;*/
   background: #2c3e50;
   animation: aliToBlue 3s infinite;
-  animation-fill-mode:forwards;
+  animation-fill-mode: forwards;
 
   /* Safari 和 Chrome */
-  -webkit-animation:aliToBlue 3s;
-  -webkit-animation-iteration-count:1;
-  -webkit-animation-fill-mode:forwards;
+  -webkit-animation: aliToBlue 3s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-fill-mode: forwards;
 }
 
-@keyframes aliToBlue
-{
-  from {background: aliceblue;}
-  to {background: #2c3e50;}
+@keyframes aliToBlue {
+  from {
+    background: aliceblue;
+  }
+  to {
+    background: #2c3e50;
+  }
 }
+
 /* Safari and Chrome */
-@-webkit-keyframes aliToBlue
-{
-  from {background: aliceblue;}
-  to {background: #2c3e50;}
+@-webkit-keyframes aliToBlue {
+  from {
+    background: aliceblue;
+  }
+  to {
+    background: #2c3e50;
+  }
 }
 
 /* 背景动态变化  - 蓝变白 */
@@ -385,27 +281,32 @@ export default {
   /*width: 50px;*/
   background: aliceblue;
   animation: blueToAli 3s infinite;
-  animation-fill-mode:forwards;
+  animation-fill-mode: forwards;
 
   /* Safari 和 Chrome */
-  -webkit-animation:blueToAli 3s;
-  -webkit-animation-iteration-count:1;
-  -webkit-animation-fill-mode:forwards;
+  -webkit-animation: blueToAli 3s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-fill-mode: forwards;
 }
 
-@keyframes blueToAli
-{
-  from {background: #2c3e50;}
-  to {background: aliceblue;}
+@keyframes blueToAli {
+  from {
+    background: #2c3e50;
+  }
+  to {
+    background: aliceblue;
+  }
 }
+
 /* Safari and Chrome */
-@-webkit-keyframes blueToAli
-{
-  from {background: #2c3e50;}
-  to {background: aliceblue;}
+@-webkit-keyframes blueToAli {
+  from {
+    background: #2c3e50;
+  }
+  to {
+    background: aliceblue;
+  }
 }
-
-
 
 
 p.dotted {

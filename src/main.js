@@ -11,6 +11,10 @@ import store from "./Vuex";
 import Api from "./request/index"
 import vuescroll from "vuescroll"; //引入vuescroll
 import "vuescroll/dist/vuescroll.css"; //引入vuescroll样式
+// 引入 Element 组件库
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
 
 // 滚动条
 Vue.use(vuescroll);//使用
