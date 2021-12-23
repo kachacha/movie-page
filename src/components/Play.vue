@@ -40,6 +40,14 @@
       </div>
     </div>
 
+    <el-row>
+      <div class="run_button" v-for="(item, index) in video_list">
+        <el-badge :value="item.cover === 'notice' ? '预': ''" class="item" type="warning">
+          <el-button plain :id="'cover_' + (index + 1).toString()" @click="playVideo(item.video_url, 'cover_' + (index + 1).toString())">{{item.label}}</el-button>
+        </el-badge>
+      </div>
+    </el-row>
+
     <div class="row" style="border-radius: 15px;background-color: white;margin-top:10px">
       <div class="col-md-12">
         <img alt="" class="img-fluid" src="/images/tenxun.png">
@@ -70,7 +78,10 @@ export default {
       // 解析视频的链接
       videoUrl: "",
       // 播放窗口
-      isPlay: false
+      isPlay: false,
+      // 正在播放的集数
+      running_cover_num_id: "",
+      video_list: []
     }
   },
   created() {
@@ -91,10 +102,48 @@ export default {
   },
   mounted() {
     // this.playVideo();
+    this.get_episode();
     this.get_play_uri();
     this.isPc();
   },
   methods: {
+    get_episode: function () {
+      // 传得参数对象
+      // eslint-disable-next-line
+      let query = {
+        s_type: this.getQuery.s_type,
+        page_uri: this.playUrl,
+        other: 1
+      }
+      this.axios.get(process.env.VUE_APP_BASE_URL + "/zfeno-video/api/v1/episode", {
+        params: query
+      })
+          .then((res) => {
+            // eslint-disable-next-line no-console
+            console.log(res.data.code)
+            if (res.data.code > 0) {
+              this.video_list = res.data.data.video_list
+            } else {
+              layer.open({
+                title: "错误！",
+                icon: 1,
+                content: '获取集数错误，请联系管理员！',
+                time: 2000
+              });
+            }
+          })
+          .catch(res => {
+            // eslint-disable-next-line no-console
+            console.log(res)
+            layer.open({
+              title: "错误！",
+              icon: 1,
+              content: '获取集数错误，请联系管理员！',
+              time: 2000
+            });
+            // 失败时候的操作
+          });
+    },
     get_play_uri: function () {
       this.axios.get(process.env.VUE_APP_BASE_URL + "/zfeno-video/api/v1/analysis-plus")
           .then((res) => {
@@ -125,7 +174,32 @@ export default {
           });
     },
     //播放视频
-    playVideo: function () {
+    playVideo: function (video_url, cover_num_id) {
+      try
+      {
+        // 改变按钮颜色（正在播放的集数）
+        document.getElementById(cover_num_id).classList=["el-button el-button--primary"]
+        try
+        {
+          // 改变之前的集数的颜色
+          document.getElementById(this.running_cover_num_id).classList=["el-button el-button--default is-plain"]
+        }
+        catch(err)
+        {
+          // todo 第一次无匹配id，第一次跳转到此页
+        }
+
+        this.running_cover_num_id = cover_num_id
+      }
+      catch(err)
+      {
+        // 无参数，第一次跳转到此页
+      }
+
+      console.log(video_url)
+      if (typeof video_url !== "undefined") {
+        this.playUrl = video_url
+      }
       const that = this;
       if (that.playUrl === "") {
         layer.open({
@@ -168,6 +242,15 @@ export default {
 </script>
 
 <style scoped>
+
+.run_button {
+  width: 10px;
+  margin-top: 3px;
+  margin-bottom: 15px;
+  display: inline-table;
+  margin-left: 30px;
+}
+
 #case3 {
   width: 100%;
   height: 800px;
